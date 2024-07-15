@@ -4,8 +4,9 @@ def display_menu():
     print("\nTO-DO List Application")
     print("1. View TO-DO List")
     print("2. Add Task")
-    print("3. Delete Task")
-    print("4. Exit")
+    print("3. Update Task")
+    print("4. Delete Task")
+    print("5. Exit")
 
 def view_tasks():
     if not tasks:
@@ -35,7 +36,23 @@ def delete_task():
             print("Invalid task number.")
     except ValueError:
         print("Please enter a valid number.")
-
+def update_task():
+    if not tasks:
+        print("\nYour TO-DO list is empty.")
+        return
+    
+    view_tasks()
+    try:
+        task_num = int(input("\nEnter the number of the task to update: "))
+        if 1 <= task_num <= len(tasks):
+            updated_task = input("Enter the updated task: ")
+            tasks[task_num - 1] = updated_task
+            print(f"Task {task_num} updated to '{updated_task}'.")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Please enter a valid number.")
+        
 def main():
     while True:
         display_menu()
@@ -45,9 +62,11 @@ def main():
         elif choice == '2':
             add_task()
         elif choice == '3':
-            delete_task()
+            update_task()
         elif choice == '4':
-            print("Exiting the TO-DO List Application. Goodbye!")
+            delete_task()
+        elif choice == '5':
+            print("Exiting the TO-DO List Application.")
             break
         else:
             print("Invalid choice. Please try again.")
